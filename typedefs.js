@@ -1,7 +1,6 @@
 const typeDefs = `
-  type Query { books: [Book], writers: [Writer] }
-  type Book { title: String, author: String }
-  type Writer { name: String, email: String }
+  type Query { posts: [Post] }
+  type Post { title: String!, content: String, createdAt: String, modifiedAt: String, author: String }
 `;
 
-module.exports = typeDefs;
+module.exports = { typeDefs };
