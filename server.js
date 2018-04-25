@@ -1,14 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
 const { makeExecutableSchema } = require("graphql-tools");
 const { mongoose } = require("./db/mongoose");
-const cors = require("cors");
-// The GraphQL schema in string form
-const { typeDefs } = require("./schema/typedefs");
-// The resolvers
-const { resolvers } = require("./schema/resolvers");
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+const { schema } = require("./schema/schema");
 const app = express();
 
 app.use(cors());
