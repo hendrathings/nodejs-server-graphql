@@ -2,7 +2,13 @@ const { posts } = require("./query/post");
 const { users } = require("./query/user");
 const { postComments } = require("./query/comment");
 const { createPost } = require("./mutation/post");
-const { createUser } = require("./mutation/user");
+const {
+  createUser,
+  updateUser,
+  updateUsername,
+  updatePassword,
+  deleteUser
+} = require("./mutation/user");
 const { createComment } = require("./mutation/comment");
 
 const resolvers = {
@@ -14,7 +20,11 @@ const resolvers = {
   Mutation: {
     createPost,
     createUser,
-    createComment
+    createComment,
+    updateUser,
+    updateUsername,
+    updatePassword,
+    deleteUser
   }
 };
 
