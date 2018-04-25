@@ -13,4 +13,25 @@ const createPost = (obj, args, context) => {
   return newPost;
 };
 
-module.exports = { createPost };
+const updatePost = async (obj, args, context) => {
+  const currentPost = await Post.findByIdAndUpdate(
+    args.id,
+    { $set: {
+      title: args.input.title,
+      content: args.input.content,
+      author: args.input.author,
+      modifiedAt: new Date()
+    } },
+    { new: true }
+  );
+
+  return currentPost;
+};
+
+const deletePost = async (obj, args, context) => {
+  const currentPost = await Post.findByIdAndRemove(args.id);
+
+  return currentPost;
+};
+
+module.exports = { createPost, updatePost, deletePost };

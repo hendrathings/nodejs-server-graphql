@@ -1,7 +1,7 @@
-const { posts } = require("./query/post");
+const { posts, post } = require("./query/post");
 const { users } = require("./query/user");
 const { postComments } = require("./query/comment");
-const { createPost } = require("./mutation/post");
+const { createPost, deletePost, updatePost } = require("./mutation/post");
 const {
   createUser,
   updateUser,
@@ -9,11 +9,16 @@ const {
   updatePassword,
   deleteUser
 } = require("./mutation/user");
-const { createComment } = require("./mutation/comment");
+const {
+  createComment,
+  updateComment,
+  deleteComment
+} = require("./mutation/comment");
 
 const resolvers = {
   Query: {
     posts,
+    post,
     users,
     postComments
   },
@@ -24,7 +29,11 @@ const resolvers = {
     updateUser,
     updateUsername,
     updatePassword,
-    deleteUser
+    deleteUser,
+    updateComment,
+    deleteComment,
+    deletePost,
+    updatePost
   }
 };
 

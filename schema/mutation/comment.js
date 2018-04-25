@@ -21,4 +21,20 @@ const createComment = async (obj, args, context) => {
   return newComment;
 };
 
-module.exports = { createComment };
+const updateComment = async (obj, args, context) => {
+  const currentComment = await Comment.findByIdAndUpdate(
+    args.id,
+    { $set: args.input },
+    { new: true }
+  );
+  return currentComment;
+};
+
+const deleteComment =  async (obj, args, context) => {
+  const currentComment = await Comment.findByIdAndRemove(
+    args.id
+  );
+  return currentComment;
+};
+
+module.exports = { createComment, updateComment, deleteComment };

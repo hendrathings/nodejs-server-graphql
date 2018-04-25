@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const Post = mongoose.model('Post', {
+const Post = mongoose.model("Post", {
   title: {
     type: String,
     required: true
   },
   content: {
     type: String,
-    default: ''
+    default: ""
   },
   createdAt: {
     type: Date,
@@ -23,4 +23,4 @@ const Post = mongoose.model('Post', {
   }
 });
 
-module.exports = {Post};
+module.exports = { Post };
