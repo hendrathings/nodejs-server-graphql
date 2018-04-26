@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
 const { mongoose } = require("../db/mongoose.testdb");
-const { schema } = require("./schema");
+const { schema } = require("../schema/schema");
 const GRAPHQL_PORT = 4001;
 const graphQLServer = express();
 
