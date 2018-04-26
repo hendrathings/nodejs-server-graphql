@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/BlogApp");
+mongoose.connect("mongodb://localhost:27017/TestBlogApp");
 
 module.exports = { mongoose };
