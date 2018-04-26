@@ -2,7 +2,7 @@ const { User } = require("../../models/User");
 const { SHA256 } = require("crypto-js");
 const validator = require("validator");
 
-const createUser = async (obj, args, context) => {
+const createUser = async (root, args) => {
   if (!validator.isEmail(args.input.email))
     return new Error("email is not valid");
 
@@ -26,7 +26,7 @@ const createUser = async (obj, args, context) => {
   return newUser;
 };
 
-const updateUser = async (obj, args, context) => {
+const updateUser = async (root, args) => {
   if (!validator.isEmail(args.input.email))
     return new Error("email is not valid");
 
@@ -41,7 +41,7 @@ const updateUser = async (obj, args, context) => {
   return currentUser;
 };
 
-const updateUsername = async (obj, args, context) => {
+const updateUsername = async (root, args) => {
   if (!validator.isByteLength(args.input.username, { min: 8, max: undefined }))
     return new Error("username min length 8");
 
@@ -56,7 +56,7 @@ const updateUsername = async (obj, args, context) => {
   return currentUser;
 };
 
-const updatePassword = async (obj, args, context) => {
+const updatePassword = async (root, args) => {
   const currentUser = await User.findByIdAndUpdate(
     args.id,
     { $set: { password: SHA256(args.input.password) } },
@@ -65,7 +65,7 @@ const updatePassword = async (obj, args, context) => {
   return currentUser;
 };
 
-const deleteUser = async (obj, args, context) => {
+const deleteUser = async (root, args) => {
   const currentUser = await User.findByIdAndRemove(args.id);
   return currentUser;
 };

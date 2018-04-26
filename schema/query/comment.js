@@ -1,6 +1,6 @@
 const { Comment } = require("../../models/Comment");
 
-const postComments = (obj, args, context) =>
+const postComments = (root, args) =>
   Comment.find({ postId: args.postId }).then(
     _comments => _comments,
     e => console.log("Error:", e)

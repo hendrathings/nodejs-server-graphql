@@ -1,6 +1,6 @@
 const { Post } = require("../../models/Post");
 
-const createPost = (obj, args, context) => {
+const createPost = (root, args) => {
   const newPost = new Post({
     title: args.input.title,
     content: args.input.content,
@@ -13,7 +13,7 @@ const createPost = (obj, args, context) => {
   return newPost;
 };
 
-const updatePost = async (obj, args, context) => {
+const updatePost = async (root, args) => {
   const currentPost = await Post.findByIdAndUpdate(
     args.id,
     { $set: {
@@ -28,7 +28,7 @@ const updatePost = async (obj, args, context) => {
   return currentPost;
 };
 
-const deletePost = async (obj, args, context) => {
+const deletePost = async (root, args) => {
   const currentPost = await Post.findByIdAndRemove(args.id);
 
   return currentPost;

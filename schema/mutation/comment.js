@@ -3,7 +3,7 @@ const { Comment } = require("../../models/Comment");
 const { Post } = require("../../models/Post");
 const validator = require("validator");
 
-const createComment = async (obj, args, context) => {
+const createComment = async (root, args) => {
   if (!validator.isEmail(args.input.email))
     return new Error("email is not valid");
 
@@ -21,7 +21,7 @@ const createComment = async (obj, args, context) => {
   return newComment;
 };
 
-const updateComment = async (obj, args, context) => {
+const updateComment = async (root, args) => {
   const currentComment = await Comment.findByIdAndUpdate(
     args.id,
     { $set: args.input },
@@ -30,7 +30,7 @@ const updateComment = async (obj, args, context) => {
   return currentComment;
 };
 
-const deleteComment =  async (obj, args, context) => {
+const deleteComment =  async (root, args) => {
   const currentComment = await Comment.findByIdAndRemove(
     args.id
   );
