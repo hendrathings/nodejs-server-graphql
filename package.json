@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "jest --notify --bail --colors --verbose",
-    "test-inspect": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand"
+    "test-inspect":
+      "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand"
   },
   "author": "",
   "license": "ISC",
@@ -18,14 +19,20 @@
     "express": "^4.16.3",
     "graphql": "^0.13.2",
     "graphql-tools": "^2.24.0",
-    "jest": "^22.4.3",
     "mongodb": "^3.0.7",
     "mongoose": "^5.0.16",
-    "supertest": "^3.0.0",
     "validator": "^9.4.1"
   },
   "devDependencies": {
     "crypto-js": "^3.1.9-1",
-    "nodemon": "^1.17.3"
+    "jest": "^22.4.3",
+    "mongodb-memory-server": "^1.7.3",
+    "nodemon": "^1.17.3",
+    "supertest": "^3.0.0"
+  },
+  "jest": {
+    "globalSetup": "<rootDir>/config/jest/setup.js",
+    "globalTeardown": "<rootDir>/config/jest/teardown.js",
+    "testEnvironment": "<rootDir>/config/jest/mongo-environment.js"
   }
 }

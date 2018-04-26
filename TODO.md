@@ -1,4 +1,3 @@
 - upload file
 - authentication
 - scale load balancing
-- test case
