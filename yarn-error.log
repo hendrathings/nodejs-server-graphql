@@ -22,8 +22,7 @@ npm manifest:
     "scripts": {
       "start": "node server.js",
       "test": "jest --notify --bail --colors --verbose",
-      "test-inspect":
-        "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand"
+      "test-inspect": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand"
     },
     "author": "",
     "license": "ISC",
@@ -47,9 +46,7 @@ npm manifest:
       "supertest": "^3.0.0"
     },
     "jest": {
-      "globalSetup": "<rootDir>/config/jest/setup.js",
-      "globalTeardown": "<rootDir>/config/jest/teardown.js",
-      "testEnvironment": "<rootDir>/config/jest/mongo-environment.js"
+      "testEnvironment": "node"
     }
   }
 
