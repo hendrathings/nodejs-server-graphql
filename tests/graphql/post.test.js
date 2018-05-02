@@ -1,11 +1,11 @@
 const request = require("supertest");
 const { graphQLServer, serverListening } = require("./server");
-const { MongoClient, ObjectID } = require("mongodb");
+const { ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
 const casual = require("casual");
 
-let connection;
-let db;
+// let connection;
+// let db;
 const mongooseOpts = {
   // options for mongoose 4.11.3 and above
   autoReconnect: true,
@@ -14,10 +14,8 @@ const mongooseOpts = {
 };
 
 beforeAll(async () => {
-  connection = await MongoClient.connect(global.__MONGO_URI__);
-  db = await connection.db(global.__MONGO_DB_NAME__);
-  mongoose.Promise = global.Promise;
   mongoose.connect(global.__MONGO_URI__, mongooseOpts);
+  mongoose.connection.db = global.__MONGO_DB_NAME__;
   mongoose.connection.on("error", e => {
     if (e.message.code === "ETIMEDOUT") {
       console.log(e);
@@ -32,12 +30,17 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await connection.close();
-  await db.close();
+  // await connection.close();
+  // await db.close();
   serverListening.close();
 });
 
 describe("Post", () => {
+  let db;
+  beforeAll(async () => {
+    db = global.__DB__;
+  });
+
   describe("Query", () => {
     it("should query post(id) { ... } return single post", async done => {
       const id = new ObjectID();
