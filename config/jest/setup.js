@@ -1,7 +1,7 @@
 // setup.js
 const MongodbMemoryServer = require('mongodb-memory-server');
 
-const MONGO_DB_NAME = 'jest';
+const MONGO_DB_NAME = 'TestBlogApp';
 const mongod = new MongodbMemoryServer.default({
   instance: {
     dbName: MONGO_DB_NAME
