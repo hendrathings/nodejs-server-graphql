@@ -1,5 +1,5 @@
 const request = require("supertest");
-const { graphQLServer, serverListening } = require("../server");
+const { graphQLServer, serverListening } = require("./server");
 const { MongoClient, ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
 const casual = require("casual");
