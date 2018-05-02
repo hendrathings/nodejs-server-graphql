@@ -1,11 +1,14 @@
 const request = require("supertest");
-const { graphQLServer, serverListening } = require("./server");
+const { connectServer } = require("./server");
 const { ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
 const casual = require("casual");
+const express = require("express");
 
 // let connection;
 // let db;
+let serverListening;
+let graphQLServer;
 const mongooseOpts = {
   // options for mongoose 4.11.3 and above
   autoReconnect: true,
@@ -27,6 +30,8 @@ beforeAll(async () => {
   mongoose.connection.once("open", () => {
     console.log(`MongoDB successfully connected to ${global.__MONGO_URI__}`);
   });
+  graphQLServer = express();
+  serverListening = connectServer(graphQLServer);
 });
 
 afterAll(async () => {
@@ -42,11 +47,15 @@ describe("Post", () => {
   });
 
   describe("Query", () => {
-    it("should query post(id) { ... } return single post", async done => {
-      const id = new ObjectID();
-      const post = db.collection("post");
+    let id;
+    let post;
 
-      const mockPost = {
+    let mockPost;
+    beforeAll(async () => {
+      id = new ObjectID();
+      post = db.collection("post");
+
+      mockPost = {
         _id: id,
         title: casual.title,
         content: casual.text,
@@ -55,7 +64,9 @@ describe("Post", () => {
         author: casual.name
       };
       await post.insertOne(mockPost);
+    });
 
+    it("should query post(id) { ... } return single post", async done => {
       request(graphQLServer)
         .post("/graphql")
         .set("Accept", "application/json")
